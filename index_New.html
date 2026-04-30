@@ -1,0 +1,2076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kuki's &amp; Stitch — Heirloom Crocheted Companions</title>
+<meta name="description" content="Handcrafted, heirloom-quality crocheted toys and characters. Made stitch by stitch in small batches." />
+
+<!-- Google Fonts: Playfair Display (display serif) + Quicksand (rounded humanist sans) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* =========================================================
+   KUKI'S & STITCH — STYLES
+   Sections in order:
+   1. Tokens & reset
+   2. Typography
+   3. Background textures (yarn pattern, grain)
+   4. Layout helpers
+   5. Navigation
+   6. Hero
+   7. About
+   8. Gallery
+   9. How It's Made
+  10. Testimonials
+  11. Contact
+  12. Footer
+  13. Animations
+  14. Responsive
+   ========================================================= */
+
+/* 1. TOKENS & RESET ------------------------------------------------ */
+:root {
+  /* Palette — Cottage Storybook
+     (Variable names retained from the original theme so all CSS continues to work;
+      colours are simply remapped to soft pinks, lavender, butter, mint and plum.) */
+  --cream:        #fef5f0;   /* soft cream-pink page background */
+  --cream-warm:   #f8e8de;   /* warmer surface */
+  --cream-deep:   #f0d6c5;   /* deeper accent surface */
+  --rose:         #f4c4d4;   /* soft pink — primary accent */
+  --rose-deep:    #c97a9c;   /* deep pink — hover / strong */
+  --rose-soft:    #fce4ec;   /* pale pink */
+  --sage:         #d4b8e0;   /* soft lavender (was sage green) */
+  --sage-deep:    #9670b0;   /* deep lavender */
+  --sage-soft:    #ede0f3;   /* pale lavender */
+  --gold:         #ecc964;   /* butter yellow (was gold) */
+  --gold-deep:    #b8973a;   /* deep butter */
+  --ink:          #4a3855;   /* deep plum — body text */
+  --ink-soft:     #7a6685;   /* muted plum */
+  --ink-faint:    #a695b0;   /* light plum */
+  --white-warm:   #fffbf7;   /* warm white */
+
+  /* Shadows — soft & dreamy for storybook feel */
+  --shadow-sm:  0 2px 6px rgba(74,56,85,.06), 0 1px 2px rgba(74,56,85,.04);
+  --shadow-md:  0 8px 20px rgba(74,56,85,.08), 0 3px 6px rgba(74,56,85,.05);
+  --shadow-lg:  0 24px 48px rgba(74,56,85,.10), 0 8px 16px rgba(74,56,85,.06);
+  --shadow-xl:  0 40px 80px rgba(74,56,85,.14), 0 16px 32px rgba(74,56,85,.08);
+  --shadow-glow: 0 0 0 1px rgba(236,201,100,.18), 0 20px 50px rgba(201,122,156,.18);
+
+  /* Type */
+  --serif: "Playfair Display", "Cormorant Garamond", Georgia, serif;
+  --sans:  "Quicksand", "Manrope", system-ui, sans-serif;
+
+  /* Layout */
+  --container: 1200px;
+  --radius-sm: 12px;
+  --radius:    20px;
+  --radius-lg: 32px;
+  --ease:      cubic-bezier(.2,.8,.2,1);
+  --ease-soft: cubic-bezier(.22,1,.36,1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+*::selection { background: var(--rose-soft); color: var(--ink); }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--cream);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+a { color: inherit; text-decoration: none; }
+input, textarea { font: inherit; color: inherit; }
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--cream-warm); }
+::-webkit-scrollbar-thumb { background: var(--rose); border-radius: 6px; border: 2px solid var(--cream-warm); }
+::-webkit-scrollbar-thumb:hover { background: var(--rose-deep); }
+
+/* 2. TYPOGRAPHY ---------------------------------------------------- */
+h1, h2, h3, h4 {
+  font-family: var(--serif);
+  font-weight: 500;
+  letter-spacing: -.01em;
+  line-height: 1.1;
+  color: var(--ink);
+}
+h1 { font-size: clamp(2.6rem, 6vw, 4.8rem); font-weight: 400; }
+h2 { font-size: clamp(2rem, 4.2vw, 3.2rem); font-weight: 400; }
+h3 { font-size: clamp(1.3rem, 2vw, 1.6rem); font-weight: 500; }
+.italic { font-style: italic; color: var(--rose-deep); }
+
+.eyebrow {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+}
+.eyebrow::before {
+  content: "";
+  width: 32px; height: 1px;
+  background: var(--gold);
+  display: inline-block;
+}
+
+p.lead {
+  font-size: 1.15rem;
+  color: var(--ink-soft);
+  max-width: 56ch;
+  line-height: 1.7;
+}
+
+/* Decorative little ornament (used between sections / above headings) */
+.ornament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: var(--gold);
+  margin: 0 auto 18px;
+}
+.ornament::before, .ornament::after {
+  content: "";
+  width: 56px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+.ornament svg { width: 18px; height: 18px; }
+
+/* 3. BACKGROUND TEXTURES ------------------------------------------- */
+/* Subtle paper grain across the entire page */
+body::before {
+  content: "";
+  position: fixed; inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: .35;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .23  0 0 0 0 .18  0 0 0 0 .16  0 0 0 .35 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+/* Yarn-loop pattern (used on hero) */
+.yarn-pattern {
+  position: absolute; inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='90' height='90' viewBox='0 0 90 90'><g fill='none' stroke='%23c97a9c' stroke-width='1.2' stroke-linecap='round' opacity='.18'><path d='M10 30 Q22 18 34 30 T58 30'/><path d='M34 60 Q46 48 58 60 T82 60'/><path d='M-8 60 Q4 48 16 60'/><path d='M58 0 Q70 -12 82 0'/></g></svg>");
+  background-size: 90px 90px;
+  opacity: .9;
+}
+
+/* 4. LAYOUT HELPERS ------------------------------------------------ */
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 28px;
+  position: relative;
+  z-index: 2;
+}
+section { position: relative; padding: 120px 0; z-index: 2; scroll-margin-top: 90px; }
+.section-head { text-align: center; max-width: 720px; margin: 0 auto 72px; }
+.section-head .lead { margin: 18px auto 0; }
+
+/* Reusable button */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 30px;
+  border-radius: 999px;
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  transition: all .4s var(--ease);
+  position: relative;
+  isolation: isolate;
+}
+.btn-primary {
+  background: linear-gradient(180deg, #f4a8c0, var(--rose-deep));
+  color: var(--white-warm);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.35),
+    0 10px 24px rgba(201,122,156,.35),
+    0 2px 4px rgba(201,122,156,.25);
+}
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.45),
+    0 18px 36px rgba(201,122,156,.4),
+    0 4px 8px rgba(201,122,156,.3);
+}
+.btn-primary svg { transition: transform .4s var(--ease); }
+.btn-primary:hover svg { transform: translateX(4px); }
+
+.btn-outline {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--ink);
+  padding: 14px 28px;
+}
+.btn-outline:hover {
+  background: var(--ink);
+  color: var(--white-warm);
+}
+
+.btn-ghost {
+  background: var(--white-warm);
+  color: var(--ink);
+  border: 1px solid var(--cream-deep);
+  padding: 12px 22px;
+  font-size: 12px;
+  box-shadow: var(--shadow-sm);
+}
+.btn-ghost:hover {
+  background: var(--rose-deep);
+  color: var(--white-warm);
+  border-color: var(--rose-deep);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* 5. NAVIGATION ---------------------------------------------------- */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 22px 0;
+  transition: all .4s var(--ease);
+}
+.nav.scrolled {
+  background: rgba(254, 245, 240, .85);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  padding: 14px 0;
+  box-shadow: 0 1px 0 rgba(74,56,85,.06);
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.brand {
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.4rem;
+  letter-spacing: .01em;
+}
+.brand-mark {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, var(--rose-soft), var(--rose) 70%);
+  box-shadow: inset 0 -3px 6px rgba(201,122,156,.4), var(--shadow-sm);
+  display: grid; place-items: center;
+}
+.brand-mark::after {
+  content: "";
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: var(--rose-deep);
+  box-shadow: inset 1px 1px 2px rgba(0,0,0,.15);
+}
+.brand-name strong { font-weight: 500; font-style: normal; }
+.brand-name em { color: var(--gold-deep); font-style: italic; margin: 0 4px; }
+
+.nav-links {
+  display: flex;
+  gap: 38px;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: .04em;
+  color: var(--ink-soft);
+  position: relative;
+  padding: 6px 0;
+  transition: color .3s;
+}
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  bottom: 0; left: 50%;
+  width: 0; height: 1px;
+  background: var(--gold);
+  transition: all .3s var(--ease);
+  transform: translateX(-50%);
+}
+.nav-links a:hover { color: var(--ink); }
+.nav-links a:hover::after { width: 100%; }
+
+.nav-cta {
+  display: flex; align-items: center; gap: 18px;
+}
+.nav-cta a.contact-link {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  border-bottom: 1px solid var(--gold);
+  padding-bottom: 2px;
+}
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--white-warm);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  z-index: 110;
+}
+.hamburger span {
+  position: absolute;
+  left: 11px;
+  width: 18px; height: 1.5px;
+  background: var(--ink);
+  transition: all .35s var(--ease);
+}
+.hamburger span:nth-child(1) { top: 14px; }
+.hamburger span:nth-child(2) { top: 19px; width: 14px; }
+.hamburger span:nth-child(3) { top: 24px; }
+.hamburger.active span:nth-child(1) { top: 19px; transform: rotate(45deg); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { top: 19px; transform: rotate(-45deg); }
+
+/* 6. HERO ---------------------------------------------------------- */
+.hero {
+  min-height: 100vh;
+  padding: 140px 0 100px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 80% 20%, rgba(244,196,212,.18), transparent 50%),
+    radial-gradient(ellipse at 10% 80%, rgba(212,184,224,.16), transparent 50%),
+    var(--cream);
+}
+
+/* Floating soft blobs in background */
+.hero-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: .55;
+  animation: drift 18s ease-in-out infinite;
+  z-index: 1;
+}
+.hero-blob.b1 {
+  width: 380px; height: 380px;
+  background: var(--rose);
+  top: -100px; right: -120px;
+}
+.hero-blob.b2 {
+  width: 460px; height: 460px;
+  background: var(--sage);
+  bottom: -180px; left: -160px;
+  animation-delay: -6s;
+}
+.hero-blob.b3 {
+  width: 220px; height: 220px;
+  background: var(--gold);
+  top: 40%; left: 45%;
+  opacity: .25;
+  animation-delay: -12s;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.hero-text { position: relative; z-index: 3; }
+.hero-text .eyebrow { margin-bottom: 28px; }
+.hero-text h1 {
+  margin-bottom: 28px;
+  font-weight: 400;
+}
+.hero-text h1 em {
+  font-style: italic;
+  color: var(--rose-deep);
+}
+.hero-text .lead { margin-bottom: 40px; }
+.hero-actions {
+  display: flex; gap: 16px; align-items: center; flex-wrap: wrap;
+}
+.hero-meta {
+  display: flex;
+  gap: 36px;
+  margin-top: 64px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(74,56,85,.1);
+}
+.hero-meta-item .num {
+  font-family: var(--serif);
+  font-size: 2rem;
+  font-weight: 500;
+  color: var(--rose-deep);
+  display: block;
+  line-height: 1;
+}
+.hero-meta-item .label {
+  font-size: 12px;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-top: 6px;
+}
+
+/* Hero stack — layered cards giving 3D fabric depth */
+.hero-stack {
+  position: relative;
+  perspective: 1400px;
+  z-index: 3;
+  height: 540px;
+}
+.hero-card {
+  position: absolute;
+  border-radius: var(--radius-lg);
+  background: var(--white-warm);
+  box-shadow: var(--shadow-xl);
+  transition: transform 1s var(--ease-soft);
+  overflow: hidden;
+}
+.hero-card.main {
+  width: 78%; height: 88%;
+  top: 6%; left: 11%;
+  transform: rotateX(2deg) rotateY(-4deg);
+  z-index: 3;
+  animation: float-soft 8s ease-in-out infinite;
+}
+.hero-card.behind-1 {
+  width: 70%; height: 78%;
+  top: 14%; left: 4%;
+  transform: rotate(-7deg);
+  background: var(--sage-soft);
+  z-index: 1;
+  animation: float-soft 8s ease-in-out infinite;
+  animation-delay: -2s;
+}
+.hero-card.behind-2 {
+  width: 70%; height: 78%;
+  top: 10%; right: 0;
+  transform: rotate(6deg);
+  background: var(--rose-soft);
+  z-index: 2;
+  animation: float-soft 8s ease-in-out infinite;
+  animation-delay: -4s;
+}
+.hero-card .card-inner {
+  width: 100%; height: 100%;
+  background: linear-gradient(135deg, var(--cream-warm), var(--cream-deep));
+  position: relative;
+  overflow: hidden;
+}
+.hero-card .card-inner img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+/* Placeholder visual when image isn't there yet */
+.placeholder-art {
+  position: absolute; inset: 0;
+  display: grid; place-items: center;
+  background:
+    radial-gradient(circle at 30% 30%, var(--rose-soft), transparent 60%),
+    radial-gradient(circle at 70% 70%, var(--sage-soft), transparent 60%),
+    var(--cream-deep);
+}
+.placeholder-art svg {
+  width: 56%; height: auto;
+  opacity: .6;
+}
+
+/* Floating badge over hero stack */
+.hero-badge {
+  position: absolute;
+  bottom: 20px; left: -20px;
+  background: var(--white-warm);
+  border-radius: 999px;
+  padding: 14px 22px;
+  display: flex; align-items: center; gap: 12px;
+  box-shadow: var(--shadow-lg);
+  z-index: 5;
+  animation: float-soft 6s ease-in-out infinite;
+  animation-delay: -1s;
+}
+.hero-badge .dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--sage-deep);
+  box-shadow: 0 0 0 4px rgba(150,112,176,.2);
+  animation: pulse 2.4s ease-in-out infinite;
+}
+.hero-badge span { font-size: 13px; font-weight: 500; letter-spacing: .04em; }
+.hero-badge strong { color: var(--rose-deep); }
+
+.hero-stamp {
+  position: absolute;
+  top: -10px; right: -10px;
+  width: 110px; height: 110px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--cream);
+  display: grid; place-items: center;
+  text-align: center;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 14px;
+  line-height: 1.3;
+  z-index: 6;
+  box-shadow: var(--shadow-lg);
+  transform: rotate(-12deg);
+  animation: spin-slow 22s linear infinite;
+}
+.hero-stamp .ring { color: var(--gold); font-size: 11px; letter-spacing: .15em; }
+.hero-stamp em { color: var(--gold); font-style: italic; }
+
+/* 7. ABOUT --------------------------------------------------------- */
+.about {
+  background: var(--white-warm);
+  position: relative;
+}
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 90px;
+  align-items: center;
+}
+
+/* Photo area — layered offset cards behind */
+.about-photo {
+  position: relative;
+  aspect-ratio: 4 / 5;
+}
+.about-photo .photo-frame {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-xl);
+  z-index: 3;
+}
+.about-photo .photo-frame img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.about-photo::before,
+.about-photo::after {
+  content: "";
+  position: absolute;
+  border-radius: var(--radius-lg);
+}
+.about-photo::before {
+  inset: 24px -24px -24px 24px;
+  background: var(--rose-soft);
+  z-index: 1;
+}
+.about-photo::after {
+  inset: -16px 16px 16px -16px;
+  border: 1px solid var(--gold);
+  z-index: 2;
+}
+
+.about-photo .quote-tag {
+  position: absolute;
+  bottom: -28px; right: -28px;
+  background: var(--ink);
+  color: var(--cream);
+  padding: 18px 22px;
+  border-radius: var(--radius);
+  z-index: 4;
+  box-shadow: var(--shadow-lg);
+  max-width: 220px;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+.about-photo .quote-tag::before {
+  content: "“";
+  font-family: var(--serif);
+  font-size: 3rem;
+  color: var(--gold);
+  position: absolute;
+  top: -10px; left: 14px;
+  line-height: 1;
+}
+
+.about-text h2 { margin-bottom: 28px; }
+.about-text h2 em { font-style: italic; color: var(--rose-deep); }
+.about-text p + p { margin-top: 18px; }
+.about-text .signature {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.6rem;
+  color: var(--rose-deep);
+  margin-top: 32px;
+  display: inline-block;
+  border-bottom: 1px solid var(--gold);
+  padding-bottom: 4px;
+}
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 48px;
+  padding-top: 40px;
+  border-top: 1px solid var(--cream-deep);
+}
+.about-stats .num {
+  font-family: var(--serif);
+  font-size: 2.4rem;
+  color: var(--ink);
+  display: block;
+  line-height: 1;
+}
+.about-stats .num em {
+  font-size: 1.4rem;
+  color: var(--gold-deep);
+  font-style: italic;
+}
+.about-stats .label {
+  font-size: 12px;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-top: 8px;
+}
+
+/* Training-note callout — small offering box in About section */
+.training-note {
+  margin-top: 28px;
+  padding: 20px 22px;
+  background: linear-gradient(180deg, rgba(236,201,100,.07), rgba(236,201,100,.03));
+  border-left: 2px solid var(--gold);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.training-note svg {
+  flex-shrink: 0;
+  width: 26px; height: 26px;
+  color: var(--gold-deep);
+  margin-top: 2px;
+}
+.training-note .note-body { flex: 1; }
+.training-note .note-label {
+  display: block;
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  margin-bottom: 6px;
+}
+.training-note p {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: var(--ink);
+  margin: 0;
+}
+
+/* 8. GALLERY ------------------------------------------------------- */
+.gallery {
+  background: var(--cream);
+  position: relative;
+}
+.gallery::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 200px;
+  background: linear-gradient(180deg, var(--white-warm), transparent);
+  pointer-events: none;
+}
+
+.gallery-filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 56px;
+}
+.gallery-filters button {
+  padding: 10px 22px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: .06em;
+  color: var(--ink-soft);
+  background: var(--white-warm);
+  border: 1px solid var(--cream-deep);
+  transition: all .3s var(--ease);
+}
+.gallery-filters button:hover {
+  color: var(--ink);
+  border-color: var(--gold);
+}
+.gallery-filters button.active {
+  background: var(--ink);
+  color: var(--cream);
+  border-color: var(--ink);
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 24px;
+  perspective: 1600px;
+}
+/* Masonry sizing via row spans */
+.gallery-card { grid-column: span 4; }
+.gallery-card.tall { grid-row: span 2; }
+.gallery-card.wide { grid-column: span 6; }
+
+.gallery-card {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--white-warm);
+  box-shadow: var(--shadow-md);
+  transition: transform .6s var(--ease-soft), box-shadow .6s var(--ease-soft);
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+/* Tall cards use flex so the image stretches to fill 2 rows of grid height */
+.gallery-card.tall {
+  display: flex;
+  flex-direction: column;
+}
+.gallery-card:hover {
+  transform: translateY(-10px) rotateX(3deg) rotateY(-2deg);
+  box-shadow: var(--shadow-xl);
+}
+.gallery-card .card-image {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--cream-warm);
+}
+.gallery-card.tall .card-image {
+  aspect-ratio: auto;
+  flex: 1 1 auto;
+  min-height: 100%;
+}
+.gallery-card.wide .card-image { aspect-ratio: 8 / 5; }
+
+.gallery-card .card-image img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 1s var(--ease-soft);
+}
+.gallery-card:hover .card-image img { transform: scale(1.06); }
+
+.gallery-card .card-meta {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 24px 22px;
+  background: linear-gradient(180deg, transparent, rgba(74,56,85,.85));
+  color: var(--cream);
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+}
+.gallery-card .toy-info h3 {
+  color: var(--cream);
+  font-size: 1.4rem;
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+.gallery-card .toy-info .price {
+  font-size: 13px;
+  letter-spacing: .1em;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+.gallery-card .enquire {
+  background: var(--cream);
+  color: var(--ink);
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: all .3s var(--ease);
+  flex-shrink: 0;
+}
+.gallery-card .enquire:hover {
+  background: var(--gold);
+  color: var(--white-warm);
+  transform: translateY(-2px);
+}
+
+/* Tag in corner */
+.gallery-card .tag {
+  position: absolute;
+  top: 16px; left: 16px;
+  background: var(--white-warm);
+  color: var(--ink);
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  z-index: 2;
+  box-shadow: var(--shadow-sm);
+}
+.gallery-card .tag.sage { background: var(--sage-deep); color: var(--cream); }
+.gallery-card .tag.rose { background: var(--rose-deep); color: var(--cream); }
+
+/* 9. HOW IT'S MADE ------------------------------------------------- */
+.process {
+  background: var(--white-warm);
+  position: relative;
+}
+.process::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 50%; height: 80px; width: 1px;
+  background: linear-gradient(180deg, transparent, var(--gold));
+  transform: translateX(-50%);
+}
+
+.process-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-top: 60px;
+  position: relative;
+}
+.process-grid::before {
+  content: "";
+  position: absolute;
+  top: 70px; left: 12%; right: 12%;
+  height: 1px;
+  background: repeating-linear-gradient(90deg, var(--gold) 0 8px, transparent 8px 16px);
+  z-index: 0;
+  opacity: .5;
+}
+
+.process-card {
+  background: var(--cream);
+  border-radius: var(--radius-lg);
+  padding: 56px 32px 36px;
+  text-align: center;
+  position: relative;
+  box-shadow: var(--shadow-md);
+  transition: transform .5s var(--ease), box-shadow .5s var(--ease);
+}
+.process-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+}
+.process-num {
+  position: absolute;
+  top: -28px; left: 50%;
+  transform: translateX(-50%);
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  background: var(--white-warm);
+  border: 1px solid var(--gold);
+  display: grid; place-items: center;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.6rem;
+  color: var(--gold-deep);
+  box-shadow: var(--shadow-md);
+  z-index: 1;
+}
+.process-icon {
+  width: 80px; height: 80px;
+  margin: 12px auto 24px;
+  border-radius: 50%;
+  background: var(--rose-soft);
+  display: grid; place-items: center;
+  color: var(--rose-deep);
+  transition: transform .5s var(--ease);
+}
+.process-card:nth-child(2) .process-icon { background: var(--sage-soft); color: var(--sage-deep); }
+.process-card:nth-child(3) .process-icon { background: rgba(236,201,100,.25); color: var(--gold-deep); }
+.process-card:hover .process-icon { transform: rotate(-8deg) scale(1.06); }
+.process-icon svg { width: 36px; height: 36px; }
+.process-card h3 { margin-bottom: 12px; }
+.process-card p { color: var(--ink-soft); font-size: .95rem; }
+
+/* 10. TESTIMONIALS ------------------------------------------------- */
+.testimonials {
+  background: var(--cream);
+  position: relative;
+}
+
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+.testimonial-card {
+  background: var(--white-warm);
+  border-radius: var(--radius-lg);
+  padding: 40px 32px 32px;
+  position: relative;
+  box-shadow: var(--shadow-md);
+  transition: transform .5s var(--ease-soft), box-shadow .5s var(--ease-soft);
+}
+.testimonial-card:hover {
+  transform: translateY(-6px) rotate(-.4deg);
+  box-shadow: var(--shadow-lg);
+}
+.testimonial-card:nth-child(2) { transform: translateY(28px); }
+.testimonial-card:nth-child(2):hover { transform: translateY(22px) rotate(.4deg); }
+
+.testimonial-card .mark {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 4.5rem;
+  color: var(--gold);
+  line-height: 1;
+  position: absolute;
+  top: 18px; left: 24px;
+  opacity: .35;
+}
+.testimonial-card blockquote {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  line-height: 1.55;
+  color: var(--ink);
+  margin: 32px 0 28px;
+  position: relative;
+  z-index: 1;
+}
+.stars {
+  display: flex; gap: 2px;
+  color: var(--gold);
+  margin-bottom: 18px;
+}
+.stars svg { width: 16px; height: 16px; fill: var(--gold); }
+
+.testimonial-author {
+  display: flex; align-items: center; gap: 14px;
+  padding-top: 20px;
+  border-top: 1px solid var(--cream-deep);
+}
+.author-avatar {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--rose-soft), var(--sage-soft));
+  display: grid; place-items: center;
+  font-family: var(--serif);
+  color: var(--ink);
+  font-weight: 500;
+  flex-shrink: 0;
+}
+.author-info .name {
+  font-weight: 600;
+  font-size: .95rem;
+}
+.author-info .place {
+  font-size: 12px;
+  color: var(--ink-faint);
+  letter-spacing: .05em;
+}
+
+/* 11. CONTACT ------------------------------------------------------ */
+.contact {
+  background: var(--ink);
+  color: var(--cream);
+  position: relative;
+  overflow: hidden;
+}
+.contact::before {
+  content: "";
+  position: absolute;
+  top: -200px; right: -100px;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--rose-deep), transparent 65%);
+  opacity: .35;
+  filter: blur(40px);
+}
+.contact::after {
+  content: "";
+  position: absolute;
+  bottom: -200px; left: -100px;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--sage-deep), transparent 65%);
+  opacity: .3;
+  filter: blur(40px);
+}
+
+.contact .ornament { color: var(--gold); }
+.contact .ornament::before, .contact .ornament::after {
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+.contact .eyebrow { color: var(--gold); }
+.contact h2 { color: var(--cream); }
+.contact h2 em { color: var(--rose); }
+.contact .lead { color: rgba(254,245,240,.75); }
+
+.contact-wrap {
+  max-width: 720px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+.form {
+  margin-top: 56px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+}
+.form .field { position: relative; }
+.form .field.full { grid-column: 1 / -1; }
+.form label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+.form input, .form textarea {
+  width: 100%;
+  padding: 16px 18px;
+  background: rgba(254,245,240,.05);
+  border: 1px solid rgba(254,245,240,.15);
+  border-radius: var(--radius-sm);
+  color: var(--cream);
+  font-family: var(--sans);
+  font-size: 15px;
+  transition: all .3s var(--ease);
+}
+.form input:focus, .form textarea:focus {
+  outline: none;
+  border-color: var(--gold);
+  background: rgba(254,245,240,.08);
+  box-shadow: 0 0 0 4px rgba(236,201,100,.12);
+}
+.form textarea {
+  resize: vertical;
+  min-height: 140px;
+  font-family: var(--sans);
+}
+.form .submit-row {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+.form .submit-row p {
+  font-size: 13px;
+  color: rgba(254,245,240,.6);
+}
+
+.form-message {
+  grid-column: 1 / -1;
+  padding: 16px 20px;
+  border-radius: var(--radius-sm);
+  background: rgba(212,184,224,.15);
+  border: 1px solid var(--sage-deep);
+  color: var(--sage-soft);
+  font-size: 14px;
+  display: none;
+}
+.form-message.visible { display: block; animation: fade-in .5s var(--ease); }
+
+/* 12. FOOTER ------------------------------------------------------- */
+.footer {
+  background: var(--ink);
+  color: rgba(254,245,240,.7);
+  padding: 60px 0 36px;
+  border-top: 1px solid rgba(254,245,240,.08);
+  position: relative;
+  z-index: 2;
+}
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 28px;
+}
+.footer .brand { color: var(--cream); font-size: 1.6rem; }
+.footer .brand em { color: var(--gold); }
+.footer p { font-size: 14px; max-width: 460px; }
+
+.socials {
+  display: flex;
+  gap: 14px;
+}
+.socials a {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: rgba(254,245,240,.06);
+  border: 1px solid rgba(254,245,240,.1);
+  display: grid; place-items: center;
+  color: var(--cream);
+  transition: all .3s var(--ease);
+}
+.socials a:hover {
+  background: var(--gold);
+  color: var(--ink);
+  border-color: var(--gold);
+  transform: translateY(-3px);
+}
+.socials svg { width: 18px; height: 18px; }
+
+.footer-meta {
+  font-size: 12px;
+  letter-spacing: .1em;
+  color: rgba(254,245,240,.4);
+  border-top: 1px solid rgba(254,245,240,.08);
+  padding-top: 24px;
+  margin-top: 12px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.footer-meta a:hover { color: var(--gold); }
+
+/* 13. ANIMATIONS --------------------------------------------------- */
+@keyframes float-soft {
+  0%, 100% { transform: translateY(0) rotate(var(--r, 0deg)); }
+  50%      { transform: translateY(-12px) rotate(var(--r, 0deg)); }
+}
+.hero-card.main { --r: 0deg; }
+.hero-card.behind-1 { --r: -7deg; }
+.hero-card.behind-2 { --r: 6deg; }
+
+@keyframes drift {
+  0%, 100% { transform: translate(0,0); }
+  50%      { transform: translate(40px, -30px); }
+}
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(150,112,176,.5); }
+  50%      { box-shadow: 0 0 0 8px rgba(150,112,176,0); }
+}
+@keyframes spin-slow {
+  from { transform: rotate(-12deg); }
+  to   { transform: rotate(348deg); }
+}
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Scroll reveal — controlled via JS adding .is-visible */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity .9s var(--ease-soft), transform .9s var(--ease-soft);
+}
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: .1s; }
+.reveal-delay-2 { transition-delay: .2s; }
+.reveal-delay-3 { transition-delay: .3s; }
+.reveal-delay-4 { transition-delay: .4s; }
+
+/* Page load sequence — hero entrance */
+@keyframes hero-rise {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-text > * { opacity: 0; animation: hero-rise 1s var(--ease-soft) forwards; }
+.hero-text > *:nth-child(1) { animation-delay: .2s; }
+.hero-text > *:nth-child(2) { animation-delay: .4s; }
+.hero-text > *:nth-child(3) { animation-delay: .6s; }
+.hero-text > *:nth-child(4) { animation-delay: .8s; }
+.hero-text > *:nth-child(5) { animation-delay: 1s; }
+.hero-stack { opacity: 0; animation: hero-rise 1.2s var(--ease-soft) .4s forwards; }
+
+/* 14. RESPONSIVE -------------------------------------------------- */
+@media (max-width: 960px) {
+  section { padding: 90px 0; }
+  .hero-grid { grid-template-columns: 1fr; gap: 60px; }
+  .hero-stack { height: 460px; max-width: 480px; margin: 0 auto; }
+  .about-grid { grid-template-columns: 1fr; gap: 80px; }
+  .about-photo { max-width: 480px; margin: 0 auto; }
+  .process-grid { grid-template-columns: 1fr; gap: 56px; margin-top: 40px; }
+  .process-grid::before { display: none; }
+  .testimonial-grid { grid-template-columns: 1fr; gap: 24px; }
+  .testimonial-card:nth-child(2) { transform: none; }
+  .testimonial-card:nth-child(2):hover { transform: translateY(-6px); }
+  .gallery-grid { grid-template-columns: repeat(6, 1fr); gap: 18px; }
+  .gallery-card { grid-column: span 3; }
+  .gallery-card.wide { grid-column: span 6; }
+  .gallery-card.tall { grid-row: span 1; display: block; }
+  .gallery-card.tall .card-image {
+    aspect-ratio: 4 / 5;
+    flex: none;
+    min-height: auto;
+  }
+
+  .nav-links, .nav-cta a.contact-link { display: none; }
+  .hamburger { display: block; }
+
+  /* Mobile menu */
+  .nav-mobile {
+    position: fixed;
+    inset: 0;
+    background: var(--cream);
+    z-index: 105;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    transform: translateY(-100%);
+    transition: transform .5s var(--ease-soft);
+  }
+  .nav-mobile.active { transform: translateY(0); }
+  .nav-mobile a {
+    font-family: var(--serif);
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: var(--ink);
+  }
+  .nav-mobile a em { color: var(--rose-deep); font-style: italic; }
+  .nav-mobile .btn { margin-top: 20px; }
+}
+
+@media (max-width: 600px) {
+  .container { padding: 0 22px; }
+  section { padding: 70px 0; }
+  .section-head { margin-bottom: 48px; }
+  .hero { padding: 110px 0 60px; min-height: auto; }
+  .hero-stack { height: 380px; }
+  .hero-meta { flex-wrap: wrap; gap: 24px; margin-top: 40px; padding-top: 24px; }
+  .hero-meta-item { flex: 1; min-width: 30%; }
+  .hero-stamp { width: 90px; height: 90px; font-size: 12px; }
+  .hero-stamp .ring { font-size: 9px; }
+
+  .form { grid-template-columns: 1fr; gap: 18px; }
+  .gallery-grid { grid-template-columns: 1fr; }
+  .gallery-card, .gallery-card.wide { grid-column: span 1; }
+  .gallery-filters { gap: 6px; }
+  .gallery-filters button { padding: 8px 16px; font-size: 12px; }
+
+  .about-photo .quote-tag { right: 0; bottom: -20px; max-width: 200px; padding: 14px 18px; }
+  .about-stats { gap: 16px; }
+  .about-stats .num { font-size: 1.8rem; }
+
+  .testimonial-card { padding: 32px 24px 24px; }
+  .testimonial-card blockquote { font-size: 1.05rem; }
+
+  .ornament::before, .ornament::after { width: 30px; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================ NAV ============================ -->
+<header class="nav" id="nav">
+  <div class="container nav-inner">
+    <a href="#top" class="brand" aria-label="Kuki's & Stitch">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-name"><strong>Kuki&#39;s</strong><em>&amp;</em><span>Stitch</span></span>
+    </a>
+
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#gallery">Collection</a></li>
+        <li><a href="#process">How It's Made</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
+      </ul>
+    </nav>
+
+    <div class="nav-cta">
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div class="nav-mobile" id="navMobile">
+    <a href="#about">About</a>
+    <a href="#gallery">Collection</a>
+    <a href="#process">How It's <em>Made</em></a>
+    <a href="#testimonials">Reviews</a>
+  </div>
+</header>
+
+<!-- ============================ HERO =========================== -->
+<section class="hero" id="top">
+  <div class="yarn-pattern" aria-hidden="true"></div>
+  <div class="hero-blob b1" aria-hidden="true"></div>
+  <div class="hero-blob b2" aria-hidden="true"></div>
+  <div class="hero-blob b3" aria-hidden="true"></div>
+
+  <div class="container hero-grid">
+    <div class="hero-text">
+      <span class="eyebrow">Heirloom Crochet · Est. 2019</span>
+      <h1>Tiny treasures,<br/><em>made stitch</em><br/>by stitch.</h1>
+      <p class="lead">Heirloom-quality crocheted toys and characters — lovingly handmade in small batches with the softest organic cotton, destined to be loved for a lifetime.</p>
+      <div class="hero-actions">
+        <a href="#gallery" class="btn btn-primary">
+          Shop the Collection
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <span class="num">100%</span>
+          <span class="label">Hand-stitched</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="num">600+</span>
+          <span class="label">Pieces made</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="num">14 days</span>
+          <span class="label">Average craft time</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-stack" aria-hidden="false">
+      <div class="hero-card behind-1"></div>
+      <div class="hero-card behind-2"></div>
+      <div class="hero-card main">
+        <div class="card-inner">
+          <img src="images/hero.jpg" alt="A cream crocheted bunny with its caterpillar friends — handmade by Khurshid Mistry" onerror="this.style.display='none'; this.parentElement.querySelector('.placeholder-art').style.display='grid';" />
+          <div class="placeholder-art" style="display:grid">
+            <!-- Placeholder bunny illustration shown until images/hero.jpg is added -->
+            <svg viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg" fill="none">
+              <ellipse cx="100" cy="170" rx="62" ry="58" fill="#f8e8de" stroke="#c97a9c" stroke-width="1.5"/>
+              <ellipse cx="78" cy="80" rx="14" ry="38" fill="#f8e8de" stroke="#c97a9c" stroke-width="1.5"/>
+              <ellipse cx="122" cy="80" rx="14" ry="38" fill="#f8e8de" stroke="#c97a9c" stroke-width="1.5"/>
+              <ellipse cx="78" cy="80" rx="6" ry="22" fill="#fce4ec"/>
+              <ellipse cx="122" cy="80" rx="6" ry="22" fill="#fce4ec"/>
+              <ellipse cx="100" cy="130" rx="42" ry="36" fill="#fffbf7" stroke="#c97a9c" stroke-width="1.5"/>
+              <circle cx="86" cy="125" r="3" fill="#4a3855"/>
+              <circle cx="114" cy="125" r="3" fill="#4a3855"/>
+              <path d="M96 138 Q100 142 104 138" stroke="#c97a9c" stroke-width="1.5" stroke-linecap="round"/>
+              <circle cx="74" cy="138" r="6" fill="#fce4ec"/>
+              <circle cx="126" cy="138" r="6" fill="#fce4ec"/>
+              <path d="M40 220 Q100 200 160 220" stroke="#9670b0" stroke-width="2" stroke-linecap="round" fill="none"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-stamp" aria-hidden="true">
+        <div>
+          <div class="ring">— SINCE 2019 —</div>
+          <em>Made with</em><br/>
+          love
+        </div>
+      </div>
+
+      <div class="hero-badge">
+        <span class="dot"></span>
+        <span><strong>Now booking</strong> · Spring drops</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ ABOUT ========================== -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-photo reveal">
+        <div class="photo-frame">
+          <img src="images/artist.jpg" alt="The artist at work" onerror="this.style.display='none'; this.parentElement.querySelector('.placeholder-art').style.display='grid';" />
+          <div class="placeholder-art" style="display:grid">
+            <svg viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg" fill="none">
+              <circle cx="100" cy="100" r="42" fill="#f8e8de" stroke="#c97a9c" stroke-width="1.5"/>
+              <path d="M40 220 Q40 160 100 160 Q160 160 160 220" fill="#fce4ec" stroke="#c97a9c" stroke-width="1.5"/>
+              <circle cx="88" cy="98" r="2.5" fill="#4a3855"/>
+              <circle cx="112" cy="98" r="2.5" fill="#4a3855"/>
+              <path d="M92 112 Q100 116 108 112" stroke="#c97a9c" stroke-width="1.2" stroke-linecap="round"/>
+              <path d="M70 70 Q100 50 130 70" stroke="#9670b0" stroke-width="2" fill="none"/>
+            </svg>
+          </div>
+        </div>
+        <div class="quote-tag">Each piece begins with a single thread.</div>
+      </div>
+
+      <div class="about-text reveal reveal-delay-1">
+        <span class="eyebrow">Meet the maker</span>
+        <h2>A quiet studio,<br/>a single thread,<br/><em>a lifetime of love.</em></h2>
+        <p>Kuki&#39;s &amp; Stitch is a brand I created. I&#39;m a senior citizen, and I learned this craft from my mum — an art that is slowly disappearing. Decades later, that same gentle craft has become my way of bringing small joys into the world — one little character at a time.</p>
+        <p>Every toy is made by hand from start to finish, in a slow, deliberate rhythm that no machine could ever replicate. I use only premium organic cotton, hypoallergenic stuffing, and embroidered details — never glued buttons or beads — so each companion is safe to be loved hard, washed gently, and kept forever.</p>
+
+        <aside class="training-note">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+            <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+          </svg>
+          <div class="note-body">
+            <span class="note-label">Passing on the craft</span>
+            <p>And I&#39;d love to teach — I can train anyone who is interested in learning this beautiful art.</p>
+          </div>
+        </aside>
+
+        <span class="signature">— Khurshid Mistry</span>
+
+        <div class="about-stats">
+          <div>
+            <span class="num">6<em>yrs</em></span>
+            <span class="label">Crafting</span>
+          </div>
+          <div>
+            <span class="num">600<em>+</em></span>
+            <span class="label">Homes reached</span>
+          </div>
+          <div>
+            <span class="num">100<em>%</em></span>
+            <span class="label">Organic cotton</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ GALLERY ======================== -->
+<section class="gallery" id="gallery">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="ornament" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z"/></svg>
+      </div>
+      <span class="eyebrow">The Collection</span>
+      <h2 style="margin-top:18px">Little companions, <em>made to be loved.</em></h2>
+      <p class="lead">A rotating gathering of one-of-a-kind crocheted characters. Tap any piece to enquire — most can also be commissioned in your own colours.</p>
+    </div>
+
+    <!-- Filters (purely visual; JS hooks below filter by data-category) -->
+    <div class="gallery-filters reveal">
+      <button class="active" data-filter="all">All</button>
+      <button data-filter="characters">Characters</button>
+      <button data-filter="animals">Animals</button>
+      <button data-filter="wearables">Wearables</button>
+      <button data-filter="seasonal">Seasonal</button>
+    </div>
+
+    <div class="gallery-grid">
+      <!-- ============================================================
+        ADD NEW PHOTO HERE
+        ============================================================
+        Copy the block below, paste it inside .gallery-grid, and update:
+          • src="images/YOUR-FILE.jpg"   (drop the photo into /images)
+          • alt="Description for accessibility"
+          • <h3>Toy Name</h3>
+          • data-category="animals" | "characters" | "seasonal"
+          • Optional sizing class on .gallery-card:
+              (none)  = standard card
+              .tall   = double-height (recommended every 3rd card)
+              .wide   = double-width  (use sparingly)
+          • Optional <span class="tag rose|sage">NEW</span> in top corner
+        ----- TEMPLATE — DO NOT REMOVE -----
+        <article class="gallery-card" data-category="animals">
+          <span class="tag">NEW</span>
+          <div class="card-image">
+            <img src="images/toy-name.jpg" alt="Description" />
+          </div>
+          <div class="card-meta">
+            <div class="toy-info">
+              <h3>Toy Name</h3>
+            </div>
+            <a href="#contact" class="enquire">Enquire</a>
+          </div>
+        </article>
+        ----- END TEMPLATE -----
+      ============================================================ -->
+
+      <!-- ADD NEW PHOTO HERE -->
+      <article class="gallery-card tall reveal" data-category="characters">
+        <span class="tag rose">Signature</span>
+        <div class="card-image">
+          <img src="images/toy1.jpg" alt="Florabelle the Flower Princess — a crocheted doll in a soft pink dress with a multicoloured flower crown" onerror="this.parentElement.classList.add('no-img');" />
+        </div>
+        <div class="card-meta">
+          <div class="toy-info">
+            <h3>Florabelle the Flower Princess</h3>
+          </div>
+          <a href="#contact" class="enquire">Enquire</a>
+        </div>
+      </article>
+
+      <article class="gallery-card reveal reveal-delay-1" data-category="animals">
+        <div class="card-image">
+          <img src="images/toy2.jpg" alt="Pip the Penguin — a small navy and white crocheted penguin amigurumi" onerror="this.parentElement.classList.add('no-img');" />
+        </div>
+        <div class="card-meta">
+          <div class="toy-info">
+            <h3>Pip the Penguin</h3>
+          </div>
+          <a href="#contact" class="enquire">Enquire</a>
+        </div>
+      </article>
+
+      <article class="gallery-card reveal reveal-delay-2" data-category="wearables">
+        <div class="card-image">
+          <img src="images/toy3.jpg" alt="Cherry Cupcake Cap — a bright crocheted children's hat with a cherry topper" onerror="this.parentElement.classList.add('no-img');" />
+        </div>
+        <div class="card-meta">
+          <div class="toy-info">
+            <h3>Cherry Cupcake Cap</h3>
+          </div>
+          <a href="#contact" class="enquire">Enquire</a>
+        </div>
+      </article>
+
+      <article class="gallery-card reveal" data-category="characters">
+        <div class="card-image">
+          <img src="images/toy4.jpg" alt="Daydream the Happy Cloud — a kawaii white crocheted cloud with rosy cheeks" onerror="this.parentElement.classList.add('no-img');" />
+        </div>
+        <div class="card-meta">
+          <div class="toy-info">
+            <h3>Daydream the Cloud</h3>
+          </div>
+          <a href="#contact" class="enquire">Enquire</a>
+        </div>
+      </article>
+
+      <article class="gallery-card tall reveal reveal-delay-1" data-category="characters">
+        <span class="tag sage">Heirloom</span>
+        <div class="card-image">
+          <img src="images/toy5.jpg" alt="The Heirloom Bear Blanket — a personalised crocheted baby blanket with teddy bear squares and hearts" onerror="this.parentElement.classList.add('no-img');" />
+        </div>
+        <div class="card-meta">
+          <div class="toy-info">
+            <h3>The Heirloom Bear Blanket</h3>
+          </div>
+          <a href="#contact" class="enquire">Enquire</a>
+        </div>
+      </article>
+
+      <article class="gallery-card reveal reveal-delay-2" data-category="animals">
+        <div class="card-image">
+          <img src="images/toy6.jpg" alt="Coral the Caterpillar — a peach and pastel crocheted caterpillar with big eyes and a smiling face" onerror="this.parentElement.classList.add('no-img');" />
+        </div>
+        <div class="card-meta">
+          <div class="toy-info">
+            <h3>Coral the Caterpillar</h3>
+          </div>
+          <a href="#contact" class="enquire">Enquire</a>
+        </div>
+      </article>
+
+      <article class="gallery-card reveal" data-category="characters">
+        <div class="card-image">
+          <img src="images/toy7.jpg" alt="Luna the Sleepy Moon — a crocheted crescent moon with closed eyes and a tiny Santa hat" onerror="this.parentElement.classList.add('no-img');" />
+        </div>
+        <div class="card-meta">
+          <div class="toy-info">
+            <h3>Luna the Sleepy Moon</h3>
+          </div>
+          <a href="#contact" class="enquire">Enquire</a>
+        </div>
+      </article>
+
+      <article class="gallery-card reveal reveal-delay-1" data-category="wearables">
+        <div class="card-image">
+          <img src="images/toy8.jpg" alt="Little Cherry Beanie — a soft red crocheted baby cap" onerror="this.parentElement.classList.add('no-img');" />
+        </div>
+        <div class="card-meta">
+          <div class="toy-info">
+            <h3>Little Cherry Beanie</h3>
+          </div>
+          <a href="#contact" class="enquire">Enquire</a>
+        </div>
+      </article>
+
+      <article class="gallery-card tall reveal reveal-delay-2" data-category="seasonal">
+        <span class="tag">Festive</span>
+        <div class="card-image">
+          <img src="images/toy9.jpg" alt="The Hearth Stocking — a classic red and white crocheted Christmas stocking" onerror="this.parentElement.classList.add('no-img');" />
+        </div>
+        <div class="card-meta">
+          <div class="toy-info">
+            <h3>The Hearth Stocking</h3>
+          </div>
+          <a href="#contact" class="enquire">Enquire</a>
+        </div>
+      </article>
+
+      <article class="gallery-card reveal" data-category="wearables">
+        <div class="card-image">
+          <img src="images/toy10.jpg" alt="Sunshine Smile Beanie — an orange crocheted beanie with a green smiley patch" onerror="this.parentElement.classList.add('no-img');" />
+        </div>
+        <div class="card-meta">
+          <div class="toy-info">
+            <h3>Sunshine Smile Beanie</h3>
+          </div>
+          <a href="#contact" class="enquire">Enquire</a>
+        </div>
+      </article>
+
+      <article class="gallery-card reveal reveal-delay-1" data-category="seasonal">
+        <div class="card-image">
+          <img src="images/toy11.jpg" alt="Jingle Bell Pair — red and white crocheted Christmas bells with a pink bow" onerror="this.parentElement.classList.add('no-img');" />
+        </div>
+        <div class="card-meta">
+          <div class="toy-info">
+            <h3>Jingle Bell Pair</h3>
+          </div>
+          <a href="#contact" class="enquire">Enquire</a>
+        </div>
+      </article>
+
+      <article class="gallery-card reveal reveal-delay-2" data-category="seasonal">
+        <div class="card-image">
+          <img src="images/toy12.jpg" alt="The Festive Collection — a crocheted Christmas set including a stocking, stars and bell ornaments" onerror="this.parentElement.classList.add('no-img');" />
+        </div>
+        <div class="card-meta">
+          <div class="toy-info">
+            <h3>The Festive Collection</h3>
+          </div>
+          <a href="#contact" class="enquire">Enquire</a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================ PROCESS ======================== -->
+<section class="process" id="process">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="ornament" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg>
+      </div>
+      <span class="eyebrow">How It's Made</span>
+      <h2 style="margin-top:18px">From <em>sketchbook</em> to your doorstep.</h2>
+      <p class="lead">No two pieces are ever quite the same. Here's how each little companion comes to life.</p>
+    </div>
+
+    <div class="process-grid">
+      <div class="process-card reveal">
+        <span class="process-num">i</span>
+        <div class="process-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 21l3-3 12-12 3 3-12 12-3 3z"/>
+            <path d="M14 8l3 3"/>
+            <circle cx="6" cy="18" r="1.5" fill="currentColor"/>
+          </svg>
+        </div>
+        <h3>Design</h3>
+        <p>Every character begins as a pencil sketch. We choose colours together, plan each detail, and create a one-of-one pattern just for you.</p>
+      </div>
+
+      <div class="process-card reveal reveal-delay-1">
+        <span class="process-num">ii</span>
+        <div class="process-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 9c0-3 4-5 8-5s8 2 8 5-4 5-8 5-8-2-8-5z"/>
+            <path d="M4 12c0 3 4 5 8 5s8-2 8-5"/>
+            <path d="M4 15c0 3 4 5 8 5s8-2 8-5"/>
+          </svg>
+        </div>
+        <h3>Crochet</h3>
+        <p>Stitch by gentle stitch, your companion takes shape. We use only organic cotton, hand-embroidered features, and hypoallergenic filling — never glue.</p>
+      </div>
+
+      <div class="process-card reveal reveal-delay-2">
+        <span class="process-num">iii</span>
+        <div class="process-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+            <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+            <line x1="12" y1="22.08" x2="12" y2="12"/>
+          </svg>
+        </div>
+        <h3>Ship with care</h3>
+        <p>Each piece is wrapped in tissue paper, tied with cotton ribbon, and tucked into a keepsake box — ready to be opened and loved.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ TESTIMONIALS =================== -->
+<section class="testimonials" id="testimonials">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="ornament" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l2.39 6.95H22l-6.19 4.5 2.39 6.95L12 16.9l-6.19 4.5 2.39-6.95L2 8.95h7.61z"/></svg>
+      </div>
+      <span class="eyebrow">In their own words</span>
+      <h2 style="margin-top:18px">Loved in homes <em>all over the world.</em></h2>
+    </div>
+
+    <div class="testimonial-grid">
+      <article class="testimonial-card reveal">
+        <span class="mark">“</span>
+        <div class="stars" aria-label="5 out of 5 stars">
+          <svg viewBox="0 0 24 24"><path d="M12 2l2.39 6.95H22l-6.19 4.5 2.39 6.95L12 16.9l-6.19 4.5 2.39-6.95L2 8.95h7.61z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l2.39 6.95H22l-6.19 4.5 2.39 6.95L12 16.9l-6.19 4.5 2.39-6.95L2 8.95h7.61z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l2.39 6.95H22l-6.19 4.5 2.39 6.95L12 16.9l-6.19 4.5 2.39-6.95L2 8.95h7.61z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l2.39 6.95H22l-6.19 4.5 2.39 6.95L12 16.9l-6.19 4.5 2.39-6.95L2 8.95h7.61z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l2.39 6.95H22l-6.19 4.5 2.39 6.95L12 16.9l-6.19 4.5 2.39-6.95L2 8.95h7.61z"/></svg>
+        </div>
+        <blockquote>The bunny we commissioned for our daughter's christening is honestly a small piece of art. The craftsmanship is unreal — every detail was perfect.</blockquote>
+        <div class="testimonial-author">
+          <div class="author-avatar">A</div>
+          <div class="author-info">
+            <div class="name">Amelia R.</div>
+            <div class="place">Brooklyn, NY</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="testimonial-card reveal reveal-delay-1">
+        <span class="mark">“</span>
+        <div class="stars" aria-label="5 out of 5 stars">
+          <svg viewBox="0 0 24 24"><path d="M12 2l2.39 6.95H22l-6.19 4.5 2.39 6.95L12 16.9l-6.19 4.5 2.39-6.95L2 8.95h7.61z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l2.39 6.95H22l-6.19 4.5 2.39 6.95L12 16.9l-6.19 4.5 2.39-6.95L2 8.95h7.61z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l2.39 6.95H22l-6.19 4.5 2.39 6.95L12 16.9l-6.19 4.5 2.39-6.95L2 8.95h7.61z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l2.39 6.95H22l-6.19 4.5 2.39 6.95L12 16.9l-6.19 4.5 2.39-6.95L2 8.95h7.61z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l2.39 6.95H22l-6.19 4.5 2.39 6.95L12 16.9l-6.19 4.5 2.39-6.95L2 8.95h7.61z"/></svg>
+        </div>
+        <blockquote>Khurshid's work has the kind of soul you can't fake. My little fox sits on my desk and genuinely makes me smile every single morning.</blockquote>
+        <div class="testimonial-author">
+          <div class="author-avatar">S</div>
+          <div class="author-info">
+            <div class="name">Sofia D.</div>
+            <div class="place">London, UK</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="testimonial-card reveal reveal-delay-2">
+        <span class="mark">“</span>
+        <div class="stars" aria-label="5 out of 5 stars">
+          <svg viewBox="0 0 24 24"><path d="M12 2l2.39 6.95H22l-6.19 4.5 2.39 6.95L12 16.9l-6.19 4.5 2.39-6.95L2 8.95h7.61z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l2.39 6.95H22l-6.19 4.5 2.39 6.95L12 16.9l-6.19 4.5 2.39-6.95L2 8.95h7.61z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l2.39 6.95H22l-6.19 4.5 2.39 6.95L12 16.9l-6.19 4.5 2.39-6.95L2 8.95h7.61z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l2.39 6.95H22l-6.19 4.5 2.39 6.95L12 16.9l-6.19 4.5 2.39-6.95L2 8.95h7.61z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l2.39 6.95H22l-6.19 4.5 2.39 6.95L12 16.9l-6.19 4.5 2.39-6.95L2 8.95h7.61z"/></svg>
+        </div>
+        <blockquote>From the packaging to the tiniest stitch, everything felt thoughtful and luxurious. This is the only handmade gift I've ever cried opening.</blockquote>
+        <div class="testimonial-author">
+          <div class="author-avatar">M</div>
+          <div class="author-info">
+            <div class="name">Mei L.</div>
+            <div class="place">Singapore</div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ CONTACT ======================== -->
+<section class="contact" id="contact">
+  <div class="container contact-wrap">
+    <div class="section-head reveal">
+      <div class="ornament" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 11.5V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2"/><path d="M2 7l10 6 10-6"/></svg>
+      </div>
+      <h2 style="margin-top:18px">Let's bring something <em>lovely</em> into the world.</h2>
+      <p class="lead">Tell me a little about what you're imagining — the colours, the character, the moment it's for. I'll write back within two days with sketches and timing.</p>
+    </div>
+
+    <form class="form reveal reveal-delay-1" id="contactForm" novalidate>
+      <div class="field">
+        <label for="name">Your name</label>
+        <input type="text" id="name" name="name" placeholder="e.g. Priya Sharma" required />
+      </div>
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="you@example.com" required />
+      </div>
+      <div class="field full">
+        <label for="message">What are you dreaming up?</label>
+        <textarea id="message" name="message" placeholder="A bunny in cream and dusty rose, for my niece's first birthday in May…" required></textarea>
+      </div>
+      <div class="form-message" id="formMessage">
+        Thank you — your note is on its way. I'll write back within two working days.
+      </div>
+      <div class="submit-row">
+        <p>No commitments. Just a friendly first chat.</p>
+        <button type="submit" class="btn btn-primary">
+          Send your note
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ============================ FOOTER ========================= -->
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="brand" style="font-size:1.6rem;">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-name"><strong>Kuki&#39;s</strong><em>&amp;</em><span>Stitch</span></span>
+    </div>
+    <p>Heirloom-quality crocheted companions, lovingly handmade in small batches and shipped worldwide.</p>
+
+    <div class="socials">
+      <a href="https://instagram.com/" aria-label="Instagram" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      </a>
+      <a href="https://wa.me/" aria-label="WhatsApp" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+      </a>
+      <a href="mailto:hello@kukisandstitch.com" aria-label="Email">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </a>
+    </div>
+
+    <div class="footer-meta">
+      <span>© <span id="year"></span> Kuki's &amp; Stitch · Made with care</span>
+      <a href="#top">Back to top ↑</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ===================================================================
+   KUKI'S & STITCH — INTERACTIONS
+   - Sticky nav state on scroll
+   - Mobile hamburger menu
+   - Smooth-scroll for in-page links (browser handles via CSS)
+   - IntersectionObserver scroll-reveals
+   - Gallery filtering
+   - Contact form (client-side handler)
+   - Tiny hover parallax on gallery cards
+   =================================================================== */
+
+(function () {
+  // Year in footer
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* --- Nav scroll state --- */
+  const nav = document.getElementById('nav');
+  const onScroll = () => {
+    if (window.scrollY > 30) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* --- Mobile menu --- */
+  const burger = document.getElementById('hamburger');
+  const navMobile = document.getElementById('navMobile');
+  burger.addEventListener('click', () => {
+    const active = burger.classList.toggle('active');
+    navMobile.classList.toggle('active', active);
+    burger.setAttribute('aria-expanded', active);
+    document.body.style.overflow = active ? 'hidden' : '';
+  });
+  navMobile.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      burger.classList.remove('active');
+      navMobile.classList.remove('active');
+      burger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    });
+  });
+
+  /* --- Scroll reveals --- */
+  const revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(el => io.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('is-visible'));
+  }
+
+  /* --- Gallery filters --- */
+  const filterButtons = document.querySelectorAll('.gallery-filters button');
+  const galleryCards = document.querySelectorAll('.gallery-card');
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      galleryCards.forEach(card => {
+        const show = filter === 'all' || card.dataset.category === filter;
+        card.style.display = show ? '' : 'none';
+      });
+    });
+  });
+
+  /* --- Subtle 3D tilt on gallery cards (skip on touch devices) --- */
+  const isTouch = matchMedia('(hover: none)').matches;
+  if (!isTouch) {
+    galleryCards.forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        card.style.transform =
+          `translateY(-10px) rotateX(${(-y * 6).toFixed(2)}deg) rotateY(${(x * 6).toFixed(2)}deg)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+      });
+    });
+  }
+
+  /* ============================================================
+     CONTACT FORM — EMAIL DELIVERY
+     ============================================================
+     The form sends submissions to heykayoz@gmail.com.
+
+     ┌─ HOW TO ENABLE LIVE IN-PAGE SENDING (one-time, ~2 min) ─┐
+     │                                                          │
+     │  1. Go to https://formspree.io/                          │
+     │  2. Sign up using heykayoz@gmail.com                     │
+     │  3. Click "+ New Form" → name it (e.g. "Kuki's Site")    │
+     │  4. Copy the form's endpoint URL — it looks like:        │
+     │       https://formspree.io/f/abcdwxyz                    │
+     │  5. Paste it as the value of FORM_ENDPOINT below,        │
+     │     replacing the YOUR_FORM_ID placeholder.              │
+     │                                                          │
+     │  Free plan = 50 submissions per month, no credit card.   │
+     │                                                          │
+     │  UNTIL YOU SET THIS UP: the form falls back gracefully — │
+     │  clicking "Send your note" will open the visitor's       │
+     │  email app pre-addressed to heykayoz@gmail.com with the  │
+     │  message ready to send. So the site works either way.    │
+     └──────────────────────────────────────────────────────────┘ */
+  const FORM_ENDPOINT  = 'https://formspree.io/f/mojrqnlz';
+  const RECIPIENT_EMAIL = 'heykayoz@gmail.com';
+
+  const form        = document.getElementById('contactForm');
+  const formMessage = document.getElementById('formMessage');
+  const submitBtn   = form.querySelector('button[type="submit"]');
+  const originalBtn = submitBtn.innerHTML;
+
+  function showMessage(text, kind) {
+    formMessage.textContent = text;
+    if (kind === 'error') {
+      formMessage.style.background   = 'rgba(244,196,212,.15)';
+      formMessage.style.borderColor  = 'var(--rose-deep)';
+      formMessage.style.color        = 'var(--rose-soft)';
+    } else if (kind === 'info') {
+      formMessage.style.background   = 'rgba(236,201,100,.12)';
+      formMessage.style.borderColor  = 'var(--gold)';
+      formMessage.style.color        = 'var(--cream)';
+    } else { /* success */
+      formMessage.style.background   = 'rgba(212,184,224,.15)';
+      formMessage.style.borderColor  = 'var(--sage-deep)';
+      formMessage.style.color        = 'var(--sage-soft)';
+    }
+    formMessage.classList.add('visible');
+  }
+
+  function resetButton() {
+    submitBtn.disabled    = false;
+    submitBtn.innerHTML   = originalBtn;
+    submitBtn.style.opacity = '';
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const name    = form.name.value.trim();
+    const email   = form.email.value.trim();
+    const message = form.message.value.trim();
+
+    if (!name || !email || !message) {
+      showMessage('Please fill in all fields so I can write back.', 'error');
+      return;
+    }
+
+    submitBtn.disabled    = true;
+    submitBtn.innerHTML   = 'Sending…';
+    submitBtn.style.opacity = '.7';
+
+    /* Fallback path: if Formspree isn't configured, open the
+       visitor's email app pre-filled with the message. */
+    if (FORM_ENDPOINT.includes('YOUR_FORM_ID')) {
+      const subject = encodeURIComponent(`A note from ${name} — Kuki's & Stitch`);
+      const body    = encodeURIComponent(`From: ${name} <${email}>\n\n${message}`);
+      window.location.href = `mailto:${RECIPIENT_EMAIL}?subject=${subject}&body=${body}`;
+      showMessage("Opening your email app to send the note…", 'info');
+      setTimeout(resetButton, 1500);
+      return;
+    }
+
+    /* Live path: send to Formspree, which forwards to heykayoz@gmail.com */
+    try {
+      const response = await fetch(FORM_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept':       'application/json'
+        },
+        body: JSON.stringify({
+          name, email, message,
+          _subject: `A note from ${name} — Kuki's & Stitch`,
+          _replyto: email
+        })
+      });
+
+      if (response.ok) {
+        showMessage("Thank you — your note is on its way. I'll write back within two working days.", 'success');
+        form.reset();
+        setTimeout(() => formMessage.classList.remove('visible'), 8000);
+      } else {
+        throw new Error('Server responded with ' + response.status);
+      }
+    } catch (err) {
+      showMessage(`Sorry — something went wrong sending the note. You can email ${RECIPIENT_EMAIL} directly.`, 'error');
+    } finally {
+      resetButton();
+    }
+  });
+
+})();
+</script>
+</body>
+</html>
