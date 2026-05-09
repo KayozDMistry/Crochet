@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Kuki's &amp; Stitch — Heirloom Crocheted Companions</title>
+<title>Kuki's Stitch — Heirloom Crocheted Companions</title>
 <meta name="description" content="Handcrafted, heirloom-quality crocheted toys and characters. Made stitch by stitch in small batches." />
 
 <!-- Google Fonts: Fraunces (display serif) + Manrope (humanist sans) -->
@@ -269,28 +269,27 @@ section { position: relative; padding: 120px 0; z-index: 2; scroll-margin-top: 9
   justify-content: space-between;
 }
 .brand {
-  display: flex; align-items: center; gap: 12px;
+  display: flex; align-items: center; gap: 20px;
   font-family: var(--serif);
   font-style: italic;
-  font-size: 1.6rem;
+  font-size: 3.2rem;
   letter-spacing: .01em;
 }
 .brand-mark {
-  width: 42px; height: 42px;
+  width: 84px; height: 84px;
   border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, var(--rose-soft), var(--rose) 70%);
-  box-shadow: inset 0 -3px 6px rgba(178,126,121,.4), var(--shadow-sm);
-  display: grid; place-items: center;
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: var(--shadow-sm);
+  background: var(--white-warm);
 }
-.brand-mark::after {
-  content: "";
-  width: 16px; height: 16px;
-  border-radius: 50%;
-  background: var(--rose-deep);
-  box-shadow: inset 1px 1px 2px rgba(0,0,0,.15);
+.brand-mark img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
 }
 .brand-name strong { font-weight: 500; font-style: normal; }
-.brand-name em { color: var(--gold-deep); font-style: italic; margin: 0 4px; }
+.brand-name em { color: var(--gold-deep); font-style: italic; margin: 0 6px; }
 
 .nav-links {
   display: flex;
@@ -354,6 +353,9 @@ section { position: relative; padding: 120px 0; z-index: 2; scroll-margin-top: 9
 .hamburger.active span:nth-child(1) { top: 19px; transform: rotate(45deg); }
 .hamburger.active span:nth-child(2) { opacity: 0; }
 .hamburger.active span:nth-child(3) { top: 19px; transform: rotate(-45deg); }
+
+/* Mobile menu hidden by default; activated inside mobile media query */
+.nav-mobile { display: none; }
 
 /* 6. HERO ---------------------------------------------------------- */
 .hero {
@@ -490,7 +492,8 @@ section { position: relative; padding: 120px 0; z-index: 2; scroll-margin-top: 9
 }
 .hero-card .card-inner img {
   width: 100%; height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  padding: 16px;
 }
 /* Placeholder visual when image isn't there yet */
 .placeholder-art {
@@ -1243,11 +1246,11 @@ section { position: relative; padding: 120px 0; z-index: 2; scroll-margin-top: 9
 
   /* Mobile menu */
   .nav-mobile {
+    display: flex;
     position: fixed;
     inset: 0;
     background: var(--cream);
     z-index: 105;
-    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -1309,9 +1312,9 @@ section { position: relative; padding: 120px 0; z-index: 2; scroll-margin-top: 9
 <!-- ============================ NAV ============================ -->
 <header class="nav" id="nav">
   <div class="container nav-inner">
-    <a href="#top" class="brand" aria-label="Kuki's & Stitch">
-      <span class="brand-mark" aria-hidden="true"></span>
-      <span class="brand-name"><strong>Kuki&#39;s</strong><em>&amp;</em><span>Stitch</span></span>
+    <a href="#top" class="brand" aria-label="Kuki's Stitch">
+      <span class="brand-mark" aria-hidden="true"><img src="images/logo.png" alt="" /></span>
+      <span class="brand-name"><strong>Kuki&#39;s</strong> <span>Stitch</span></span>
     </a>
 
     <nav>
@@ -1379,9 +1382,9 @@ section { position: relative; padding: 120px 0; z-index: 2; scroll-margin-top: 9
       <div class="hero-card behind-2"></div>
       <div class="hero-card main">
         <div class="card-inner">
-          <img src="images/hero.jpg" alt="A cream crocheted bunny with its caterpillar friends — handmade by Khurshid Mistry" onerror="this.style.display='none'; this.parentElement.querySelector('.placeholder-art').style.display='grid';" />
-          <div class="placeholder-art" style="display:grid">
-            <!-- Placeholder bunny illustration shown until images/hero.jpg is added -->
+          <img src="images/Main.png" alt="Kuki's Stitch — handcrafted crochet artwork" onerror="this.style.display='none'; this.parentElement.querySelector('.placeholder-art').style.display='grid';" />
+          <div class="placeholder-art" style="display:none">
+            <!-- Placeholder bunny illustration shown only if images/Main.png fails to load -->
             <svg viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg" fill="none">
               <ellipse cx="100" cy="170" rx="62" ry="58" fill="#efe5d3" stroke="#b27e79" stroke-width="1.5"/>
               <ellipse cx="78" cy="80" rx="14" ry="38" fill="#efe5d3" stroke="#b27e79" stroke-width="1.5"/>
@@ -1423,7 +1426,7 @@ section { position: relative; padding: 120px 0; z-index: 2; scroll-margin-top: 9
       <div class="about-photo reveal">
         <div class="photo-frame">
           <img src="images/artist.jpg" alt="The artist at work" onerror="this.style.display='none'; this.parentElement.querySelector('.placeholder-art').style.display='grid';" />
-          <div class="placeholder-art" style="display:grid">
+          <div class="placeholder-art" style="display:none">
             <svg viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg" fill="none">
               <circle cx="100" cy="100" r="42" fill="#efe5d3" stroke="#b27e79" stroke-width="1.5"/>
               <path d="M40 220 Q40 160 100 160 Q160 160 160 220" fill="#ead6d2" stroke="#b27e79" stroke-width="1.5"/>
@@ -1440,7 +1443,7 @@ section { position: relative; padding: 120px 0; z-index: 2; scroll-margin-top: 9
       <div class="about-text reveal reveal-delay-1">
         <span class="eyebrow">Meet the maker</span>
         <h2>A quiet studio,<br/>a single thread,<br/><em>a lifetime of love.</em></h2>
-        <p>Kuki&#39;s &amp; Stitch is a brand I created. I&#39;m a senior citizen, and I learned this craft from my mum — an art that is slowly disappearing. Decades later, that same gentle craft has become my way of bringing small joys into the world — one little character at a time.</p>
+        <p>Kuki&#39;s Stitch is a brand I created. I&#39;m a senior citizen, and I learned this craft from my mum — an art that is slowly disappearing. Decades later, that same gentle craft has become my way of bringing small joys into the world — one little character at a time.</p>
         <p>Every toy is made by hand from start to finish, in a slow, deliberate rhythm that no machine could ever replicate. I use only premium organic cotton, hypoallergenic stuffing, and embroidered details, so each companion is safe to be loved hard, washed gently, and kept forever.</p>
 
         <aside class="training-note">
@@ -2149,8 +2152,8 @@ section { position: relative; padding: 120px 0; z-index: 2; scroll-margin-top: 9
 <footer class="footer">
   <div class="container footer-inner">
     <div class="brand" style="font-size:1.6rem;">
-      <span class="brand-mark" aria-hidden="true"></span>
-      <span class="brand-name"><strong>Kuki&#39;s</strong><em>&amp;</em><span>Stitch</span></span>
+      <span class="brand-mark" aria-hidden="true" style="width:42px;height:42px;"><img src="images/logo.png" alt="" /></span>
+      <span class="brand-name"><strong>Kuki&#39;s</strong> <span>Stitch</span></span>
     </div>
     <p>Heirloom-quality crocheted companions, lovingly handmade in small batches all over India.</p>
 
@@ -2164,7 +2167,7 @@ section { position: relative; padding: 120px 0; z-index: 2; scroll-margin-top: 9
     </p>
 
     <div class="footer-meta">
-      <span>© <span id="year"></span> Kuki's &amp; Stitch · Made with care</span>
+      <span>© <span id="year"></span> Kuki's Stitch · Made with care</span>
       <a href="#top">Back to top ↑</a>
     </div>
   </div>
@@ -2333,7 +2336,7 @@ section { position: relative; padding: 120px 0; z-index: 2; scroll-margin-top: 9
     /* Fallback path: if Formspree isn't configured, open the
        visitor's email app pre-filled with the message. */
     if (FORM_ENDPOINT.includes('YOUR_FORM_ID')) {
-      const subject = encodeURIComponent(`A note from ${name} — Kuki's & Stitch`);
+      const subject = encodeURIComponent(`A note from ${name} — Kuki's Stitch`);
       const body    = encodeURIComponent(`From: ${name} <${email}>\n\n${message}`);
       window.location.href = `mailto:${RECIPIENT_EMAIL}?subject=${subject}&body=${body}`;
       showMessage("Opening your email app to send the note…", 'info');
@@ -2351,7 +2354,7 @@ section { position: relative; padding: 120px 0; z-index: 2; scroll-margin-top: 9
         },
         body: JSON.stringify({
           name, email, message,
-          _subject: `A note from ${name} — Kuki's & Stitch`,
+          _subject: `A note from ${name} — Kuki's Stitch`,
           _replyto: email
         })
       });
